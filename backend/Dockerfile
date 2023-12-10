@@ -5,4 +5,4 @@ COPY requirements.txt .
 RUN python3 -m pip install -r requirements.txt
 COPY . .
 
-RUN chmod a+x *.sh
+CMD ["sh", "-c", "gunicorn app:app --workers $WORKERS --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT"]

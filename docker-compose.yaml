@@ -7,7 +7,9 @@ services:
     image: backend
     build:
       context: ./backend
-    command: /bin/sh -c "/app/start.sh"
+    environment:
+      WORKERS: "4"
+      PORT: "8000"
     ports:
       - "8000:8000"
     networks:
@@ -20,7 +22,7 @@ services:
     build:
       context: ./front
       args:
-        REACT_APP_API_URL: http://127.0.0.1:8000/api/v1
+        REACT_APP_API_URL: http://127.0.0.1:8000/api
     ports:
       - "3000:80"
     networks:
